@@ -208,3 +208,11 @@ function dft_style_admin() {
 }
 add_action( 'admin_enqueue_scripts', 'dft_style_admin' );
 add_action( 'wp_enqueue_scripts', 'dft_enqueue_scripts' );
+
+function drift_post_type_admin_order( $wp_query ) {
+    if ( is_admin() && !isset( $_GET['orderby'] ) ) {
+        $wp_query->set('orderby', 'date');
+        $wp_query->set('order', 'DESC');
+    }
+   }
+   add_filter('pre_get_posts', 'drift_post_type_admin_order');
